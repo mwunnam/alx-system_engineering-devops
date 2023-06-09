@@ -1,3 +1,11 @@
 #!/bin/bash
-sudo chown
+echo "what is your name?"
+read Name
+echo "Hello $name, what is your username:"
+read -p "What is your username: " USERNAME
+echo "$Name,"
+read -sp "What is your password:" pass
+echo
+
+echo " Your name is $Name and your username is $USERNAME."
 
