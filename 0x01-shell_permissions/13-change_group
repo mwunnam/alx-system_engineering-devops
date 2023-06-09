@@ -1,2 +1,2 @@
-#!/bint/bash
+#!/bin/bash
 chgrp school hello
