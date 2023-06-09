@@ -1,4 +1,3 @@
 #!/bin/bash
-chmod u-w,u-x,u-r hello
-chmod g-w,g-x,g-r hello
-chmod o+w,o+x,o+r hello
+chmod -xwr hello
+chmod +xwr hello
