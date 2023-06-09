@@ -2,8 +2,8 @@
 
 read -p "Type your message:" COMMIT
 git add .
-sleep 3
+sleep 1 
 git commit -m"$COMMIT"
-sleep 3
+sleep1
 git push
 
