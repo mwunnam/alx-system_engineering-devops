@@ -1,0 +1,2 @@
+#!/bin/bash
+chown -r vincnet:staff _hello
