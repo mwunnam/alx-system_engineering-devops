@@ -1,0 +1,5 @@
+#!/bin/bash
+read -p "Enter file name: " NAME
+touch $NAME
+echo "#!/bin/bash" >$NAME
+vim $NAME
