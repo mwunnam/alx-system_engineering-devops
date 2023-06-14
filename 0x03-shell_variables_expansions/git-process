@@ -1,0 +1,9 @@
+#!/bin/bash
+
+read -p "Type your message:" COMMIT
+git add .
+sleep 1 
+git commit -m"$COMMIT"
+sleep 1
+git push
+
