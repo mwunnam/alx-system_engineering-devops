@@ -1,4 +1,4 @@
-#!/urs/bin/env bash
+#!/usr/bin/env bash
 # Script that kill 4-to-infinity_and_beyond
 
 kill "$(pgrep -f 4-to-infinity_and_beyond)"
