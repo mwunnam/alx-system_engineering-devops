@@ -1,4 +1,22 @@
 #!/usr/bin/env bash
 # Script gives info about a school
 
+file_path="school"
+if [ -e "$file_path" ]; then
+	echo "School file exists"
 
+	if [ -s "$file_path" ]; then
+		echo "School file is not empty"
+
+		if [ -f "$file_path" ]; then
+			echo "School is a regular file"
+		else
+			echo "(nothing)"
+		fi
+	else
+		echo "school file is empty"
+	fi
+
+else
+	echo "school file does not exist"
+fi
