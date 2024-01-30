@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Script that print Best School 10 time with while loop
+# Script that print the hours and minutes with a loop
 #
 
 hour=0
