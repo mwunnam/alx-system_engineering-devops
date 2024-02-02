@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Script show all listing sockets and also displays
+#+ PID and name of program to which socket belong
+
+netstat -l --p
