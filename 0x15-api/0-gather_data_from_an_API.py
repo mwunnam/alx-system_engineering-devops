@@ -39,7 +39,7 @@ def employee_todo_progress(employee_id):
     print(progress_message)
     for todo in todos_data:
         if todo['completed']:
-            print(f"\t{todo['title']}")
+            print(f"     {todo['title']}")
 
 
 if __name__ == "__main__":
