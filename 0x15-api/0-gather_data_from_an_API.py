@@ -33,7 +33,7 @@ def employee_todo_progress(employee_id):
             completed_tasks += 1
 
     progress_message = (
-            f'Employee {employee_name} is done with tasks '
+            f'Employee {employee_name} is done with tasks'
             f'({completed_tasks}/{total_tasks}): '
     )
     print(progress_message)
