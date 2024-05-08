@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ Script that counts the number of subscribers on reddit """
+
+
 import requests
 
 
@@ -18,13 +20,7 @@ def number_of_subscribers(subreddit):
             data = response.json()
             subscribers = data['data']['subscribers']
             return subscribers
-        elif response.status_code == 404:
-            return 0
         else:
             return 0
     except Exception as e:
         print(f'An error occured: {e}')
-
-
-if __name__ == "__main__":
-    pass

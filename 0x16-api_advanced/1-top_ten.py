@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ Script return the top 10"""
+
+
 import requests
 
 
@@ -20,7 +22,3 @@ def top_ten(subreddit):
     else:
         print('None')
         return
-
-
-if __name__ == "__main__":
-    pass
