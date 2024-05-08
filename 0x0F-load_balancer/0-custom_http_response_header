@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This is to configure nginx servers
+
+servers_headers=(
+    ["web-01]="ubuntu@100.26.152.178" "ubuntu@100.26.50.84")
