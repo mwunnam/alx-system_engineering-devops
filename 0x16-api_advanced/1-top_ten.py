@@ -18,7 +18,8 @@ def top_ten(subreddit):
         for post in data:
             print(post['data']['title'])
     else:
-        return None
+        print('None')
+        return
 
 
 if __name__ == "__main__":
