@@ -12,13 +12,18 @@ def number_of_subscribers(subreddit):
     url = f'https://www.reddit.com/r/{subreddit}/about.json'
     headers = {'User-Agent': 'Myss/0.1'}
 
-    response = requests.get(url, headers=headers, allow_redirects=False)
+    try:
+        response = requests.get(url, headers=headers, allow_redirects=False)
         if response.status_code == 200:
             data = response.json()
             subscribers = data['data']['subscribers']
             return subscribers
+        elif response.status_code == 404:
+            return 0
         else:
             return 0
+    except Exception as e:
+        print(f'An error occured: {e}')
 
 
 if __name__ == "__main__":
