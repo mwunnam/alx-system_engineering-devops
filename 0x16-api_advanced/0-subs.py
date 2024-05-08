@@ -9,7 +9,7 @@ def number_of_subscribers(subreddit):
     it does not redirect if endpoint is not found
     """
 
-    url = f'https://www.reddit.com/r{subreddit}/about.json'
+    url = f'https://www.reddit.com/r/{subreddit}/about.json'
     headers = {'User-Agent': 'Myss/0.1'}
 
     try:
