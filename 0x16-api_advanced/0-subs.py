@@ -21,6 +21,8 @@ def number_of_subscribers(subreddit):
             subscribers = data['data']['subscribers']
             return subscribers
         else:
+            print(f'Error: {response.status_code}')
             return 0
     except Exception as e:
         print(f'An error occured: {e}')
+        return 0
