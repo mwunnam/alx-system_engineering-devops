@@ -1,39 +1,31 @@
 #!/usr/bin/python3
-""" Script that get all the top title posts"""
+"""Contains recurse function"""
 import requests
 
 
-def recurse(subreddit, hot_list=None, after='', count=0):
-    """
-    This get all number of all the titles for the hot section
-    """
-
-    if hot_list is None:
-        hot_list = []
-
-    url = f'https://www.reddit.com/r/{subreddit}/hot.json'
-    headers = {'User-Agent': 'Myss/0.1'}
-    params = {
-        'after': after,
-        'count': count,
-        'limit': 100
+def recurse(subreddit, hot_list=[], after="", count=0):
+    """Returns a list of titles of all hot posts on a given subreddit."""
+    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
+    headers = {
+        "User-Agent": "0x16-api_advanced:project:\
+v1.0.0 (by /u/firdaus_cartoon_jr)"
     }
-
+    params = {
+        "after": after,
+        "count": count,
+        "limit": 100
+    }
     response = requests.get(url, headers=headers, params=params,
                             allow_redirects=False)
-
     if response.status_code == 404:
         return None
 
-    results = response.json().get('data')
-    after = results.get('after')
-
-    for result in results.get('children'):
-        hot_list.append(result.get('data').get('title'))
-
-    count += result.get('dist', 0)
+    results = response.json().get("data")
+    after = results.get("after")
+    count += results.get("dist")
+    for c in results.get("children"):
+        hot_list.append(c.get("data").get("title"))
 
     if after is not None:
         return recurse(subreddit, hot_list, after, count)
-
     return hot_list
