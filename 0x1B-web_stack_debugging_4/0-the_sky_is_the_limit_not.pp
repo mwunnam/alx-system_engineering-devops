@@ -1,8 +1,6 @@
-# fix nginx to be able to serve more request at the sametime
+#fix nginx to accept and serve more requests
 
-exec {'modify epoll to take grant more resources':
-  command  => 'sed -i "s/15/16384" /etc/default/nginx && sudo service nginx restart',
-  path     => '/usr/local/sbin:/usr/local/bin',
-
+exec {'modify max open files limit setting':
+  command => 'sed -i "s/15/10000/" /etc/default/nginx && sudo service nginx restart',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games',
 }
-
