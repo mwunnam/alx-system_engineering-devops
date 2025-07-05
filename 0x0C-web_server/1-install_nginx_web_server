@@ -4,18 +4,10 @@
 apt  update
 apt install nginx -y
 
-sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
-
-nginx -s reload
 
 echo "Hello World"  > /var/www/html/index.html
 
-kill -HUP "$(pgrep nginx)"
+chmod 664 /var/www/html/index.html
 
-nginx_pid="$(pgrep nginx)"
-if [ -z "$nginx_pid" ]; then
-    echo "Nginx not working."
-    exit 1
-fi
+service nginx restart
 
-echo "Done installing and configuring Nginx."
