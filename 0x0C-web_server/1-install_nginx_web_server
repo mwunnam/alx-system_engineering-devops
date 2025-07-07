@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 # This is a script to install and set up nginx
 
+# Exist on any error
+set -e
+
+# Update and install nginx
 apt  update
 apt install nginx -y
 
+# Start nginx on the server
+system service start nginx
 
-echo "Hello World"  > /var/www/html/index.html
+echo "Hello World!"  > /var/www/html/index.html
 
-chmod 664 /var/www/html/index.html
+chmod 644 /var/www/html/index.html
 
 service nginx restart
 
