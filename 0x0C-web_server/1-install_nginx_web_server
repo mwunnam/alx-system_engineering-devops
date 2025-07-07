@@ -9,7 +9,7 @@ apt  update
 apt install nginx -y
 
 # Start nginx on the server
-system service start nginx
+service start nginx
 
 echo "Hello World!"> /var/www/html/index.html
 
