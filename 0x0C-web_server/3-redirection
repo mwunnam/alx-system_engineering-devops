@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Configure Nginx with a 301 redirection at /redirect_me
+
+set -e
+
+# Install nginx
+apt-get update -y
+apt-get install -y nginx
+
+# Start nginx (don't use systemctl)
+service nginx start
+
+# Ensure a placeholder file exists at root to avoid 404 on /
+echo "Hello World!" > /var/www/html/index.html
+
+# Insert redirection block using sed (after first 'server {' block)
+sed -i '/server {/a \
+\\n    location /redirect_me {\n\
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\
+    }\n' /etc/nginx/sites-available/default
+
+# Restart nginx
+service nginx restart
+
