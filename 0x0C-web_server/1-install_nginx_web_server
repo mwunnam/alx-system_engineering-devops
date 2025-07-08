@@ -1,19 +1,29 @@
 #!/usr/bin/env bash
-# This is a script to install and set up nginx
+# This script installs Nginx and configures it to return "Hello World!" at /
 
-# Exist on any error
-set -e
+set -e  # Exit on any error
 
-# Update and install nginx
-apt  update
-apt install nginx -y
+# Install Nginx
+apt-get update -y
+apt-get install -y nginx
 
-# Start nginx on the server
-service start nginx
+# Start Nginx (no systemctl allowed)
+service nginx start
 
-echo "Hello World!"> /var/www/html/index.html
+# Backup the default config (just in case)
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
 
+# Update the root path to /var/www/html
+sed -i 's|root /usr/share/nginx/html;|root /var/www/html;|' /etc/nginx/sites-available/default
+
+# Make sure index line is correct
+sed -i 's|index .*;|index index.html;|' /etc/nginx/sites-available/default
+
+# Create index.html with Hello World!
+echo "Hello World!" > /var/www/html/index.html
 chmod 644 /var/www/html/index.html
 
+# Test config and restart Nginx
+nginx -t
 service nginx restart
 
