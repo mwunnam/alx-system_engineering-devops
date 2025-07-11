@@ -1,21 +1,28 @@
-#!/bin/bash
+#!/bin/bash env
 
-# Function to get DNS record for a subdomain
+# Function to get DNS record for a subdomain using awk
 get_record() {
     local domain=$1
     local subdomain=$2
 
-    result=$(dig ${subdomain}.${domain} +short)
-    record_type="A"
+    # Use dig and parse the ANSWER SECTION with awk
+    dig_output=$(dig ${subdomain}.${domain} | awk '
+        BEGIN { found=0 }
+        /^;; ANSWER SECTION:/ { found=1; next }
+        found && NF && $4 == "A" {
+            printf("The subdomain %s is a %s record and points to %s\n", "'$subdomain'", $4, $5)
+            exit
+        }')
 
-    if [[ -n "$result" ]]; then
-        echo "The subdomain ${subdomain} is a ${record_type} record and points to ${result}"
-    else
+    # If awk didn't find anything
+    if [[ -z "$dig_output" ]]; then
         echo "The subdomain ${subdomain} could not be resolved"
+    else
+        echo "$dig_output"
     fi
 }
 
-# Check arguments
+# Main logic
 domain=$1
 sub=$2
 
@@ -24,7 +31,6 @@ if [[ -z "$domain" ]]; then
     exit 1
 fi
 
-# When only domain is provided
 if [[ -z "$sub" ]]; then
     for name in www lb-01 web-01 web-02; do
         get_record $domain $name
@@ -33,4 +39,3 @@ else
     get_record $domain $sub
 fi
 
-awk
