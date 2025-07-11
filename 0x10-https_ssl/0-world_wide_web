@@ -32,3 +32,5 @@ if [[ -z "$sub" ]]; then
 else
     get_record $domain $sub
 fi
+
+awk
