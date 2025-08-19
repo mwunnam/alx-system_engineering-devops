@@ -7,14 +7,14 @@ set -e
 apt-get update -y
 apt-get install -y nginx
 
-# Start nginx (without systemctl)
+# Start nginx (don't use systemctl)
 service nginx start
 
-# Ensure placeholder file exists
+# Ensure a placeholder file exists at root to avoid 404 on /
 echo "Hello World!" > /var/www/html/index.html
 
-# Overwrite default site config with redirection block
-cat << 'EOF' > /etc/nginx/sites-available/default
+# Overwrite default site config
+cat > /etc/nginx/sites-available/default << 'EOF'
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -23,7 +23,7 @@ server {
     index index.html;
 
     location / {
-        try_files \$uri \$uri/ =404;
+        try_files $uri $uri/ =404;
     }
 
     location /redirect_me {
@@ -32,6 +32,6 @@ server {
 }
 EOF
 
-# Restart nginx to apply changes
+# Restart nginx
 service nginx restart
 
